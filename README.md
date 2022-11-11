@@ -2,6 +2,18 @@
 
 API Example:
 
+_Static Functions_
+
+```ts
+import { seekTo, play, pause } from "rn-brightcove-player";
+
+seekTo(18);
+play();
+pause();
+```
+
+_Props_
+
 ```ts
 type OnDidProgressToType = {
   nativeEvent: { progress: number };
@@ -9,19 +21,25 @@ type OnDidProgressToType = {
 
 type RNBrightcovePlayerViewProps = {
   url: string;
-  isVR?: boolean;
-  trackColor?: string;
-  projection?: string;
-  seekEnabled?: boolean;
+  isVR?: boolean; // Default false
+  trackColor?: string; // Default #cccccc
+  projection?: string; // Default equirectangular
+  seekEnabled?: boolean; // Not working
   onDidCompletePlaylist?(): void;
   onDidProgressTo?(e: OnDidProgressToType): void;
 } & ViewProps;
 ```
 
 ```ts
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { StyleSheet, View } from "react-native";
-import { OnDidProgressToType, BrightcovePlayer } from "rn-brightcove-player";
+import {
+  OnDidProgressToType,
+  BrightcovePlayer,
+  seekTo,
+  play,
+  pause,
+} from "rn-brightcove-player";
 
 const isVR = false;
 const appColor = "#69499e";
@@ -40,6 +58,20 @@ export default function App() {
     },
     []
   );
+
+  useEffect(() => {
+    setTimeout(() => {
+      seekTo(18);
+    }, 5000);
+
+    setTimeout(() => {
+      pause();
+    }, 7000);
+
+    setTimeout(() => {
+      play();
+    }, 9000);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -68,7 +100,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
 ```
 
 # API documentation
@@ -94,11 +125,8 @@ npm install rn-brightcove-player
 
 Run `npx pod-install` after installing the npm package.
 
-
 ### Configure for Android
-
-
 
 # Contributing
 
-Contributions are very welcome! Please refer to guidelines described in the [contributing guide]( https://github.com/expo/expo#contributing).
+Contributions are very welcome! Please refer to guidelines described in the [contributing guide](https://github.com/expo/expo#contributing).

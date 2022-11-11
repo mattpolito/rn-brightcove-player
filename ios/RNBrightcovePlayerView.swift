@@ -104,6 +104,28 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate {
 		self.myView = BCOVPUIPlayerView(playbackController: nil, options: options, controlsView: controlView)
 		myView?.playbackController = controller
 		addSubview(myView!)
+		
+		let nc = NotificationCenter.default
+		nc.addObserver(self, selector: #selector(seekTo), name: .seekTo, object: nil)
+		nc.addObserver(self, selector: #selector(play), name: .play, object: nil)
+		nc.addObserver(self, selector: #selector(pause), name: .pause, object: nil)
+	}
+	
+	@objc func play(notification: Notification) {
+		self.myController?.play()
+	}
+	
+	@objc func pause(notification: Notification) {
+		self.myController?.pause()
+	}
+	
+	@objc func seekTo(notification: Notification) {
+		if let data = notification.userInfo as? [String: Double] {
+			for (_, seconds) in data {
+				let seekTime = CMTimeMakeWithSeconds(seconds, preferredTimescale: Int32(NSEC_PER_SEC))
+				self.myController?.seek(to: seekTime, completionHandler: nil)
+			}
+		}
 	}
 	
 	func playbackController(_ controller: BCOVPlaybackController!, didCompletePlaylist playlist: NSFastEnumeration!) {
@@ -113,5 +135,12 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate {
 	func playbackController(_ controller: BCOVPlaybackController!, playbackSession session: BCOVPlaybackSession!, didProgressTo progress: TimeInterval) {
 		let n = NSNumber(value: progress)
 		self.onDidProgressTo(["progress": n]);
+	}
+	
+	deinit {
+		let nc = NotificationCenter.default
+		nc.removeObserver(self, name: .seekTo , object: nil)
+		nc.removeObserver(self, name: .play , object: nil)
+		nc.removeObserver(self, name: .pause , object: nil)
 	}
 }

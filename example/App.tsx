@@ -1,9 +1,15 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { StyleSheet, View } from "react-native";
-import { OnDidProgressToType, BrightcovePlayer } from "rn-brightcove-player";
+import {
+  OnDidProgressToType,
+  BrightcovePlayer,
+  seekTo,
+  play,
+  pause,
+} from "rn-brightcove-player";
 
 const isVR = false;
-const appColor = "#6699FF";
+const appColor = "#69499e";
 const url = "https://www.w3schools.com/HTML/mov_bbb.mp4";
 
 export default function App() {
@@ -19,6 +25,20 @@ export default function App() {
     },
     []
   );
+
+  useEffect(() => {
+    setTimeout(() => {
+      seekTo(18);
+    }, 5000);
+
+    setTimeout(() => {
+      pause();
+    }, 7000);
+
+    setTimeout(() => {
+      play();
+    }, 9000);
+  }, []);
 
   return (
     <View style={styles.container}>

@@ -1,5 +1,14 @@
 import ExpoModulesCore
 
+extension Notification.Name {
+	static var seekTo: Notification.Name {
+		return .init(rawValue: "RNBrighCoverPlayer.seekTo") }
+	static var play: Notification.Name {
+		return .init(rawValue: "RNBrighCoverPlayer.play") }
+	static var pause: Notification.Name {
+		return .init(rawValue: "RNBrighCoverPlayer.pause") }
+}
+
 public class RNBrightcovePlayerModule: Module {
 	// Each module class must implement the definition function. The definition consists of components
 	// that describes the module's functionality and behavior.
@@ -9,6 +18,30 @@ public class RNBrightcovePlayerModule: Module {
 		// Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
 		// The module will be accessible from `requireNativeModule('RNBrightcovePlayer')` in JavaScript.
 		Name("RNBrightcovePlayer")
+		
+		AsyncFunction("seekTo") { (seconds: Double, promise: Promise) in
+			DispatchQueue.main.asyncAfter(deadline: .now()) {
+				let nc = NotificationCenter.default
+				nc.post(name: .seekTo, object: nil, userInfo: ["seconds": seconds])
+				promise.resolve()
+			}
+		}
+		
+		AsyncFunction("play") { (promise: Promise) in
+			DispatchQueue.main.asyncAfter(deadline: .now()) {
+				let nc = NotificationCenter.default
+				nc.post(name: .play, object: nil)
+				promise.resolve()
+			}
+		}
+		
+		AsyncFunction("pause") { (promise: Promise) in
+			DispatchQueue.main.asyncAfter(deadline: .now()) {
+				let nc = NotificationCenter.default
+				nc.post(name: .pause, object: nil)
+				promise.resolve()
+			}
+		}
 		
 		View(PlayerView.self) {
 			
