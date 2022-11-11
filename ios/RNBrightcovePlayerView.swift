@@ -2,47 +2,47 @@ import ExpoModulesCore
 import BrightcovePlayerSDK
 
 func hexStringToUIColor (_ hex:String) -> UIColor {
-		var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-
-		if (cString.hasPrefix("#")) {
-				cString.remove(at: cString.startIndex)
-		}
-
-		if ((cString.count) != 6) {
-				return UIColor.gray
-		}
-
-		var rgbValue:UInt64 = 0
-		Scanner(string: cString).scanHexInt64(&rgbValue)
-
-		return UIColor(
-				red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-				green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-				blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-				alpha: CGFloat(1.0)
-		)
+	var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+	
+	if (cString.hasPrefix("#")) {
+		cString.remove(at: cString.startIndex)
+	}
+	
+	if ((cString.count) != 6) {
+		return UIColor.gray
+	}
+	
+	var rgbValue:UInt64 = 0
+	Scanner(string: cString).scanHexInt64(&rgbValue)
+	
+	return UIColor(
+		red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+		green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+		blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+		alpha: CGFloat(1.0)
+	)
 }
 
 extension UIColor {
 	public convenience init?(hex: String) {
 		var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-
+		
 		if (cString.hasPrefix("#")) {
-				cString.remove(at: cString.startIndex)
+			cString.remove(at: cString.startIndex)
 		}
-
+		
 		if ((cString.count) != 6) {
-				return nil
+			return nil
 		}
-
+		
 		var rgbValue:UInt64 = 0
 		Scanner(string: cString).scanHexInt64(&rgbValue)
-
+		
 		self.init(
-				red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-				green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-				blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-				alpha: CGFloat(1.0)
+			red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+			green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+			blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+			alpha: CGFloat(1.0)
 		)
 		return;
 	}
@@ -81,7 +81,7 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate {
 		let color = UIColor(hex: trackColor!)
 		controlView?.progressSlider.minimumTrackTintColor = color
 		controlView?.progressSlider.isEnabled = seekEnabled!
-
+		
 		
 		let manager = BCOVPlayerSDKManager.shared()!
 		let controller = manager.createPlaybackController()!
@@ -93,7 +93,7 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate {
 		
 		let vrProperties = [kBCOVVideoPropertyKeyProjection: "equirectangular"]
 		let properties = isVR! ? vrProperties : nil
-
+		
 		controller.viewProjection = BCOVVideo360ViewProjection()
 		let source = BCOVSource(url: URL(string: url!)!, deliveryMethod: kBCOVSourceDeliveryHLS, properties: properties)
 		let video = BCOVVideo(source: source, cuePoints: nil, properties: properties)
