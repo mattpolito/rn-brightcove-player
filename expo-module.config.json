@@ -1,0 +1,16 @@
+{
+  "platforms": [
+    "ios",
+    "android"
+  ],
+  "ios": {
+    "modules": [
+      "RNBrightcovePlayerModule"
+    ]
+  },
+  "android": {
+    "modules": [
+      "expo.modules.rnbrightcoveplayer.RNBrightcovePlayerModule"
+    ]
+  }
+}

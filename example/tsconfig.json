@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "rn-brightcove-player": ["../src/index"],
+      "rn-brightcove-player/*": ["../src/*"]
+    }
+  }
+}
