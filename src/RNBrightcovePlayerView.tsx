@@ -11,6 +11,7 @@ export default class RNBrightcovePlayerView extends React.Component<RNBrightcove
       isVR = false,
       trackColor = "#cccccc",
       seekEnabled = false,
+      projection = "equirectangular",
       ...props
     } = this.props;
 
@@ -19,6 +20,7 @@ export default class RNBrightcovePlayerView extends React.Component<RNBrightcove
         isVR={isVR}
         trackColor={trackColor}
         seekEnabled={seekEnabled}
+        projection={projection}
         {...props}
       />
     );

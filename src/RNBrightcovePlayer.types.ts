@@ -8,6 +8,7 @@ export type RNBrightcovePlayerViewProps = {
   url: string;
   isVR?: boolean;
   trackColor?: string;
+  projection?: string;
   seekEnabled?: boolean;
   onDidCompletePlaylist?(): void;
   onDidProgressTo?(e: OnDidProgressToType): void;

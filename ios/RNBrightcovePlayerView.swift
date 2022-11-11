@@ -53,6 +53,7 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate {
 	var isVR: Bool? = nil
 	var seekEnabled: Bool? = nil
 	var trackColor: String? = nil;
+	var projection: String? = nil
 	
 	var myView: BCOVPUIPlayerView? = nil
 	var myController: BCOVPlaybackController? = nil
@@ -69,7 +70,7 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate {
 	}
 	
 	func load() {
-		let loaded = isVR != nil && url != nil && seekEnabled != nil && trackColor != nil
+		let loaded = isVR != nil && url != nil && seekEnabled != nil && trackColor != nil && projection != nil
 		if (!loaded) {
 			return
 		}
@@ -91,7 +92,7 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate {
 		controller.delegate = self
 		self.myController = controller
 		
-		let vrProperties = [kBCOVVideoPropertyKeyProjection: "equirectangular"]
+		let vrProperties = [kBCOVVideoPropertyKeyProjection: projection!]
 		let properties = isVR! ? vrProperties : nil
 		
 		controller.viewProjection = BCOVVideo360ViewProjection()

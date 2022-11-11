@@ -29,6 +29,10 @@ public class RNBrightcovePlayerModule: Module {
 				view.trackColor = trackColor
 				view.load()
 			}
+			Prop("projection") { (view: PlayerView, projection: String) in
+				view.projection = projection
+				view.load()
+			}
 			Prop("url") { (view: PlayerView, url: String) in
 				view.url = url
 				view.load()
