@@ -14,3 +14,7 @@ export async function play() {
 export async function pause() {
   return await RNBrightcovePlayer.pause();
 }
+
+export async function presentFullscreenPlayer() {
+  return await RNBrightcovePlayer.presentFullscreenPlayer();
+}

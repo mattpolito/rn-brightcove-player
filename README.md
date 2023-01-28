@@ -5,11 +5,12 @@ API Example:
 _Static Functions_
 
 ```ts
-import { seekTo, play, pause } from "rn-brightcove-player";
+import { seekTo, play, pause, presentFullscreenPlayer } from "rn-brightcove-player";
 
 seekTo(18);
 play();
 pause();
+presentFullscreenPlayer();
 ```
 
 _Props_

@@ -7,6 +7,10 @@ extension Notification.Name {
 		return .init(rawValue: "RNBrighCoverPlayer.play") }
 	static var pause: Notification.Name {
 		return .init(rawValue: "RNBrighCoverPlayer.pause") }
+  static var center: Notification.Name {
+    return .init(rawValue: "RNBrighCoverPlayer.center") }
+  static var presentFullscreenPlayer: Notification.Name {
+    return .init(rawValue: "RNBrighCoverPlayer.presentFullscreenPlayer") }
 }
 
 public class RNBrightcovePlayerModule: Module {
@@ -34,7 +38,15 @@ public class RNBrightcovePlayerModule: Module {
 				promise.resolve()
 			}
 		}
-		
+
+    AsyncFunction("presentFullscreenPlayer") { (promise: Promise) in
+      DispatchQueue.main.asyncAfter(deadline: .now()) {
+        let nc = NotificationCenter.default
+        nc.post(name: .presentFullscreenPlayer, object: nil)
+        promise.resolve()
+      }
+    }
+
 		AsyncFunction("pause") { (promise: Promise) in
 			DispatchQueue.main.asyncAfter(deadline: .now()) {
 				let nc = NotificationCenter.default
@@ -42,14 +54,25 @@ public class RNBrightcovePlayerModule: Module {
 				promise.resolve()
 			}
 		}
-		
+
+    AsyncFunction("center") { (promise: Promise) in
+      DispatchQueue.main.asyncAfter(deadline: .now()) {
+        let nc = NotificationCenter.default
+        nc.post(name: .center, object: nil)
+        promise.resolve()
+      }
+    }
+
 		View(PlayerView.self) {
 			
 			// Enables the module to be used as a native view. Definition components that are accepted as part of the
 			// view definition: Prop, Events.
 			Events("onDidCompletePlaylist")
 			Events("onDidProgressTo")
-			
+      Events("onWillTransitionTo")
+      Events("onControlsFadeIn")
+      Events("onControlsFadeOut")
+
 			Prop("isVR") { (view: PlayerView, isVR: Bool) in
 				view.isVR = isVR
 				view.load()
@@ -62,14 +85,27 @@ public class RNBrightcovePlayerModule: Module {
 				view.trackColor = trackColor
 				view.load()
 			}
+      Prop("controls") { (view: PlayerView, controls: Bool) in
+        view.controls = controls
+        view.load()
+      }
 			Prop("projection") { (view: PlayerView, projection: String) in
 				view.projection = projection
 				view.load()
 			}
+      Prop("bitRate") { (view: PlayerView, bitRate: [String: Any]) in
+        view.bitRateTitle = bitRate["title"] as? String ?? ""
+        view.options = bitRate["options"] as? [[String: Int]] ?? []
+        view.load()
+      }
 			Prop("url") { (view: PlayerView, url: String) in
-				view.url = url
-				view.load()
+        view.url = url
+        view.load()
 			}
+      Prop("autoplay") { (view: PlayerView, autoplay: Bool) in
+        view.autoplay = autoplay
+        view.load()
+      }
 		}
 	}
 }

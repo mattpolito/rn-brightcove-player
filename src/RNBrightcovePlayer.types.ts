@@ -10,6 +10,11 @@ export type RNBrightcovePlayerViewProps = {
   trackColor?: string;
   projection?: string;
   seekEnabled?: boolean;
+  controls?: boolean;
+  autoplay?: boolean;
+  bitRate?: { title: string; options: { [key: string]: number }[] };
   onDidCompletePlaylist?(): void;
+  onControlsFadeIn?(): void;
+  onControlsFadeOut?(): void;
   onDidProgressTo?(e: OnDidProgressToType): void;
 } & ViewProps;

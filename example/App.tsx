@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Button, Dimensions, StyleSheet, View } from "react-native";
 import {
   OnDidProgressToType,
   BrightcovePlayer,
   seekTo,
   play,
   pause,
+  presentFullscreenPlayer,
 } from "rn-brightcove-player";
 
 const isVR = false;
@@ -42,16 +43,32 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <BrightcovePlayer
-        ref={playerRef}
-        style={styles.player}
-        isVR={isVR}
-        seekEnabled={false}
-        trackColor={appColor}
-        url={url}
-        onDidCompletePlaylist={onDidCompletePlaylist}
-        onDidProgressTo={onDidProgressTo}
+      <Button
+        title="Play"
+        onPress={() => {
+          play();
+        }}
       />
+      <View style={{ width: "100%", height: 300, backgroundColor: "blue" }}>
+        <BrightcovePlayer
+          ref={playerRef}
+          style={styles.player}
+          isVR={isVR}
+          seekEnabled={false}
+          trackColor={appColor}
+          url={source}
+          bitRate={{
+            title: "Quality",
+            options: [
+              { "4k": 6000000 },
+              { "1080p": 3000000 },
+              { "720p": 1000000 },
+            ],
+          }}
+          onDidCompletePlaylist={onDidCompletePlaylist}
+          onDidProgressTo={onDidProgressTo}
+        />
+      </View>
     </View>
   );
 }
