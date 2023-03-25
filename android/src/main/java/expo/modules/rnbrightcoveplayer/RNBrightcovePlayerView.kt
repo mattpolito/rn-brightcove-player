@@ -7,8 +7,7 @@ import com.brightcove.player.view.BrightcoveExoPlayerVideoView
 import expo.modules.kotlin.AppContext
 import expo.modules.kotlin.views.ExpoView
 
-class RNBrightcovePlayerView(context: Context, appContext: AppContext) :
-    ExpoView(context, appContext) {
+class RNBrightcovePlayerView(context: Context, appContext: AppContext) : ExpoView(context, appContext) {
   var trackColor: String? = null
   var url: String? = null
   var isVR: Boolean? = null
@@ -41,7 +40,7 @@ class RNBrightcovePlayerView(context: Context, appContext: AppContext) :
       var video = Video.createVideo(url)
       this.player.add(video)
       this.player.start()
-      this.player.replace(0, Video.createVideo(url, projectionFormat))
+      //this.player.replace(0, Video.createVideo(url, projectionFormat))
     }
   }
 }
