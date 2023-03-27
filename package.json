@@ -1,6 +1,6 @@
 {
   "name": "rn-brightcove-player",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "My new module",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -30,8 +30,6 @@
   "homepage": "https://github.com/dillonhafer/rn-brightcove-player#readme",
   "dependencies": {},
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-native": "^0.71.4",
     "expo-module-scripts": "^3.0.3",
     "expo-modules-core": "^1.0.2"
   },
