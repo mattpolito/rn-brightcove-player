@@ -195,6 +195,7 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
     myView?.delegate = self
     addSubview(myView!)
 
+    self.myView?.video360NavigationMethod = .fingerTracking
 		let nc = NotificationCenter.default
 		nc.addObserver(self, selector: #selector(seekTo), name: .seekTo, object: nil)
 		nc.addObserver(self, selector: #selector(play), name: .play, object: nil)
