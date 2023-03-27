@@ -194,6 +194,10 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
 		myView?.playbackController = controller
     myView?.delegate = self
     addSubview(myView!)
+    self.myController?.play()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+      self.myController?.pause()
+    }
 
     self.myView?.video360NavigationMethod = .fingerTracking
 		let nc = NotificationCenter.default
