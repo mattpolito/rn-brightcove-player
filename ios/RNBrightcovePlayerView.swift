@@ -135,14 +135,15 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
       durationLayoutView,
       closedCaptionView,
     ]
-    let standardLayoutLine2 = [
-      buttonLayoutView,
+
+    var standardLayoutLine2 = isVR! ? [buttonLayoutView] : []
+    standardLayoutLine2.append(contentsOf: [
       closedCaptionView,
       spacerLayoutView,
       cardboardView,
       screenModeLayoutView,
       bitLayoutView,
-    ]
+    ])
 
     let compactLayoutLine1 = [
       playbackLayoutView,
@@ -150,15 +151,21 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
       progressLayoutView,
       durationLayoutView,
     ]
-    let compactLayoutLine2 = [
-      goBackView,
-      buttonLayoutView,
+    var compactLayoutLine2 = [
+      goBackView
+    ]
+    if isVR! {
+      compactLayoutLine2.append(contentsOf: [
+        buttonLayoutView
+      ])
+    }
+    compactLayoutLine2.append(contentsOf: [
       closedCaptionView,
       spacerLayoutView,
       cardboardView,
       screenModeLayoutView,
       bitLayoutView,
-    ]
+    ])
 
     let standardLayoutLines = [standardLayoutLine1, standardLayoutLine2]
     let compactLayoutLines = [compactLayoutLine1, compactLayoutLine2]
@@ -194,10 +201,6 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
 		myView?.playbackController = controller
     myView?.delegate = self
     addSubview(myView!)
-    self.myController?.play()
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-      self.myController?.pause()
-    }
 
     self.myView?.video360NavigationMethod = .fingerTracking
 		let nc = NotificationCenter.default
@@ -221,6 +224,7 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
 	}
 
   @objc func centerView(_ sender: UIButton) {
+    self.myView?.video360NavigationMethod = .fingerTracking
     self.myView!.playbackController.viewProjection = BCOVVideo360ViewProjection()
     self.myView!.playbackController.viewProjection.tilt = 0
     self.myView!.playbackController.viewProjection.pan = 0
@@ -236,7 +240,7 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
 			}
 		}
 	}
-	
+
 	func playbackController(_ controller: BCOVPlaybackController!, didCompletePlaylist playlist: NSFastEnumeration!) {
 		self.onDidCompletePlaylist([:]);
 	}
