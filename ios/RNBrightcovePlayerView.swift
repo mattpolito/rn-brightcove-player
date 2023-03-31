@@ -136,7 +136,9 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
       closedCaptionView,
     ]
 
-    var standardLayoutLine2 = isVR! ? [buttonLayoutView] : []
+    // Remove center button due to Brightcove bug
+    // var standardLayoutLine2 = isVR! ? [buttonLayoutView] : []
+    var standardLayoutLine2 = []
     standardLayoutLine2.append(contentsOf: [
       closedCaptionView,
       spacerLayoutView,
@@ -154,11 +156,12 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
     var compactLayoutLine2 = [
       goBackView
     ]
-    if isVR! {
-      compactLayoutLine2.append(contentsOf: [
-        buttonLayoutView
-      ])
-    }
+    // Remove center button due to Brightcove bug
+    // if isVR! {
+    //   compactLayoutLine2.append(contentsOf: [
+    //     buttonLayoutView
+    //   ])
+    // }
     compactLayoutLine2.append(contentsOf: [
       closedCaptionView,
       spacerLayoutView,
