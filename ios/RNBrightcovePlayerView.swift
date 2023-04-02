@@ -138,14 +138,14 @@ class PlayerView: ExpoView, BCOVPlaybackControllerDelegate, BCOVPUIPlayerViewDel
 
     // Remove center button due to Brightcove bug
     // var standardLayoutLine2 = isVR! ? [buttonLayoutView] : []
-    var standardLayoutLine2 = []
-    standardLayoutLine2.append(contentsOf: [
+//    standardLayoutLine2.append(contentsOf: [
+    let standardLayoutLine2 = [
       closedCaptionView,
       spacerLayoutView,
       cardboardView,
       screenModeLayoutView,
       bitLayoutView,
-    ])
+    ]
 
     let compactLayoutLine1 = [
       playbackLayoutView,
