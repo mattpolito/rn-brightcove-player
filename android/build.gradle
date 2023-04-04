@@ -88,5 +88,6 @@ repositories {
 dependencies {
   implementation project(':expo-modules-core')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${getKotlinVersion()}"
-  implementation 'com.brightcove.player:exoplayer2:8.0.1'
+  implementation "com.brightcove.player:exoplayer2:8.1.0"
+  implementation "com.brightcove.player:android-appcompat-plugin:8.1.0"
 }
