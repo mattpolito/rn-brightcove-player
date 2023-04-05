@@ -1,5 +1,7 @@
 # rn-brightcove-player
 
+Currently everything works on iOS. Android is very difficult for me to work on. Android can play videos, but 360 videos do not work, this is most likely a bug with the brightcove SDK. Android does not allow the track color to be customized either. Currently `seekTo` does not work on Android because the event is not documented from Brightcove. I wish brightcove had documentation of their API, they don't. But I must say they seem to be the only cross-platform 360 video player for android and ios, so kudos to them for that.
+
 API Example:
 
 _Static Functions_
