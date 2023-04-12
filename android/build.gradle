@@ -90,7 +90,7 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${getKotlinVersion()}"
   implementation "com.android.support:multidex:2.0.1"
   implementation "androidx.media:media:1.1.0"
-  implementation "com.brightcove.player:android-sdk:7.0.0"
-  implementation "com.brightcove.player:exoplayer2:7.0.0"
-  implementation "com.brightcove.player:android-appcompat-plugin:7.0.0"
+  implementation "com.brightcove.player:android-sdk:7.1.4"
+  implementation "com.brightcove.player:exoplayer2:7.1.4"
+  implementation "com.brightcove.player:android-appcompat-plugin:7.1.4"
 }
